@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Log In — SwiSwim{% endblock %}
+{% block content %}
+<h1>Log In</h1>
+{% if error %}<p class="error">{{ error }}</p>{% endif %}
+<form method="post" action="/login">
+    <p><label for="email">Email</label><input type="email" id="email" name="email" required></p>
+    <p><label for="password">Password</label><input type="password" id="password" name="password" required></p>
+    <p><input type="submit" value="Log In"></p>
+</form>
+{% endblock %}

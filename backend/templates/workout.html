@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}Workout — SwiSwim{% endblock %}
+{% block content %}
+<h1>{{ workout.training_name }} <span class="meta">v{{ workout.training_version }}</span></h1>
+<p class="meta">
+    Status: {{ workout.status.value }} &nbsp;|&nbsp;
+    Pool: {{ workout.pool_size_meters }}m &nbsp;|&nbsp;
+    Distance: {{ workout.total_distance_completed }}/{{ workout.total_distance_planned }}m &nbsp;|&nbsp;
+    {% if workout.total_duration_seconds %}Duration: {{ workout.total_duration_seconds // 60 }}m {{ workout.total_duration_seconds % 60 }}s{% endif %}
+</p>
+{% if workout.actual_start_time %}
+<p class="meta">
+    Started: {{ workout.actual_start_time.strftime("%d %b %Y %H:%M") }}
+    {% if workout.actual_end_time %}&nbsp;|&nbsp; Ended: {{ workout.actual_end_time.strftime("%H:%M") }}{% endif %}
+</p>
+{% endif %}
+
+<h2>Steps</h2>
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Exercise</th>
+            <th>Distance</th>
+            <th>Status</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for s in workout.steps %}
+        <tr>
+            <td>{{ s.step_number }}</td>
+            <td>{{ s.exercise_name }}</td>
+            <td>{{ s.distance_meters }}m</td>
+            <td>{{ s.status.value }}</td>
+            <td>{% if s.duration_seconds %}{{ s.duration_seconds // 60 }}m {{ s.duration_seconds % 60 }}s{% else %}—{% endif %}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

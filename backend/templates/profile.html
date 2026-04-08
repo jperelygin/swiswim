@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Profile — SwiSwim{% endblock %}
+{% block content %}
+<h1>Profile</h1>
+<table>
+    <tr><th>Email</th><td>{{ profile.email }}</td></tr>
+    <tr><th>Member since</th><td>{{ profile.created_at.strftime("%d %b %Y") }}</td></tr>
+</table>
+
+<h2>Edit Profile</h2>
+{% if error %}
+<p style="color: red;">{{ error }}</p>
+{% endif %}
+<form method="post" action="/profile">
+    <label>
+        Name<br>
+        <input type="text" name="full_name" value="{{ profile.full_name }}" required>
+    </label><br><br>
+    <label>
+        Preferred pool size ({{ pool_size_min }}–{{ pool_size_max }} m)<br>
+        <input type="number" name="preferred_pool_size"
+               value="{{ profile.preferred_pool_size }}"
+               min="{{ pool_size_min }}" max="{{ pool_size_max }}" required>
+    </label><br><br>
+    <button type="submit">Save</button>
+</form>
+{% endblock %}

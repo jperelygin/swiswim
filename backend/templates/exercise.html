@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ exercise.name }} — SwiSwim{% endblock %}
+{% block content %}
+<h1>{{ exercise.name }}</h1>
+<p class="meta">
+    Style: {{ exercise.style.value }} &nbsp;|&nbsp;
+    Distance: {{ exercise.distance_meters }}m &nbsp;|&nbsp;
+</p>
+{% if exercise.description %}<p>{{ exercise.description }}</p>{% endif %}
+{% if exercise.content_markdown %}
+<hr>
+<pre>{{ exercise.content_markdown }}</pre>
+{% endif %}
+{% endblock %}

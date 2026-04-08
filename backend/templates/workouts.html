@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Workouts — SwiSwim{% endblock %}
+{% block content %}
+<h1>Workouts <span class="meta">({{ total }})</span></h1>
+<table>
+    <thead>
+        <tr>
+            <th>Training</th>
+            <th>Status</th>
+            <th>Distance</th>
+            <th>Duration</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for w in workouts %}
+        <tr>
+            <td><a href="/workouts/{{ w.workout_id }}">{{ w.training_name }}</a></td>
+            <td>{{ w.status.value }}</td>
+            <td>{{ w.total_distance_completed }}m</td>
+            <td>{% if w.total_duration_seconds %}{{ (w.total_duration_seconds // 60) }}m {{ (w.total_duration_seconds % 60) }}s{% else %}—{% endif %}</td>
+            <td>{{ w.created_at.strftime("%d %b %Y") }}</td>
+        </tr>
+    {% else %}
+        <tr><td colspan="5">No workouts yet.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

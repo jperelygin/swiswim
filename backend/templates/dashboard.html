@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — SwiSwim{% endblock %}
+{% block content %}
+<h1>Dashboard</h1>
+<p>Hello, {{ profile.full_name }}. Pool: {{ profile.preferred_pool_size }}m.</p>
+
+<h2>Recent Workouts</h2>
+{% if recent_workouts %}
+<table>
+    <thead>
+        <tr>
+            <th>Training</th>
+            <th>Status</th>
+            <th>Distance</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for w in recent_workouts %}
+        <tr>
+            <td><a href="/workouts/{{ w.workout_id }}">{{ w.training_name }}</a></td>
+            <td>{{ w.status.value }}</td>
+            <td>{{ w.total_distance_completed }}m</td>
+            <td>{{ w.created_at.strftime("%d %b %Y") }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<p><a href="/workouts">All workouts</a></p>
+{% else %}
+<p>No workouts yet. <a href="/trainings">Pick a training</a> to get started.</p>
+{% endif %}
+{% endblock %}

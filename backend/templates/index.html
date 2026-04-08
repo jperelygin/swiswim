@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}SwiSwim{% endblock %}
+{% block content %}
+<h1>SwiSwim</h1>
+<p>A swimming training application. Follow structured training plans, track your sessions, and sync data across devices.</p>
+<ul>
+    <li><a href="/trainings">Browse training plans</a></li>
+    <li><a href="/exercises">Browse exercises</a></li>
+    {% if user %}
+    <li><a href="/dashboard">Your dashboard</a></li>
+    <li><a href="/workouts">Your workout history</a></li>
+    {% else %}
+    <li><a href="/login">Log in</a> to access your dashboard and workout history</li>
+    {% endif %}
+</ul>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}{{ training.name }} — SwiSwim{% endblock %}
+{% block content %}
+<h1>{{ training.name }}</h1>
+<p class="meta">Level: {{ training.level.value }} &nbsp;|&nbsp; Distance: {{ training.total_distance }}m
+{%- if training.estimated_duration_minutes %} &nbsp;|&nbsp; Est. {{ training.estimated_duration_minutes }} min{% endif %}
+</p>
+{% if training.description %}<p>{{ training.description }}</p>{% endif %}
+
+<h2>Steps ({{ training.steps | length }})</h2>
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Exercise</th>
+            <th>Distance</th>
+            <th>Section</th>
+            <th>Rest</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for step in training.steps | sort(attribute='step_number') %}
+        <tr>
+            <td>{{ step.step_number }}</td>
+            <td><a href="/exercises/{{ step.exercise_id }}">{{ step.exercise.name }}</a>
+                {% if step.repetitions > 1 %}&times;{{ step.repetitions }}{% endif %}
+            </td>
+            <td>{{ step.exercise.distance_meters * step.repetitions }}m</td>
+            <td>{{ step.section_type.value }}</td>
+            <td>{% if step.rest_seconds %}{{ step.rest_seconds }}s{% else %}—{% endif %}</td>
+            <td>{{ step.notes or "" }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

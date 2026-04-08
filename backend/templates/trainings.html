@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Trainings — SwiSwim{% endblock %}
+{% block content %}
+<h1>Trainings <span class="meta">({{ total }})</span></h1>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Level</th>
+            <th>Distance</th>
+            <th>Est. duration</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for t in trainings %}
+        <tr>
+            <td><a href="/trainings/{{ t.id }}">{{ t.name }}</a></td>
+            <td>{{ t.level.value }}</td>
+            <td>{{ t.total_distance }}m</td>
+            <td>{% if t.estimated_duration_minutes %}{{ t.estimated_duration_minutes }} min{% else %}—{% endif %}</td>
+        </tr>
+    {% else %}
+        <tr><td colspan="4">No trainings available.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

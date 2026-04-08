@@ -1,0 +1,15 @@
+*.env
+.vscode/
+__pycache__/
+*.pyc
+.DS_Store
+
+temp/
+.mypy_cache/
+.pytest_cache/
+
+docs/
+
+# Claude stuff
+CLAUDE.md
+memory/

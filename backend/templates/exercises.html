@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Exercises — SwiSwim{% endblock %}
+{% block content %}
+<h1>Exercises <span class="meta">({{ total }})</span></h1>
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Style</th>
+            <th>Distance</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for e in exercises %}
+        <tr>
+            <td><a href="/exercises/{{ e.id }}">{{ e.name }}</a></td>
+            <td>{{ e.style.value }}</td>
+            <td>{{ e.distance_meters }}m</td>
+        </tr>
+    {% else %}
+        <tr><td colspan="3">No exercises found.</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

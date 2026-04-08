@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}SwiSwim{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<nav>
+    <a href="/">🏊‍♂️ SwiSwim</a>
+    {% if user %}
+        <a href="/trainings">Trainings</a>
+        <a href="/exercises">Exercises</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/workouts">Workouts</a>
+        <a href="/profile">{{ user.full_name }}</a>
+        <span class="right">
+            <form method="post" action="/logout" style="display:inline">
+                <button type="submit">Log out</button>
+            </form>
+        </span>
+    {% else %}
+        <span class="right">
+            <a href="/login">Log in</a> &middot; <a href="/register">Register</a>
+        </span>
+    {% endif %}
+</nav>
+{% block content %}{% endblock %}
+</body>
+</html>
